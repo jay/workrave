@@ -1,3 +1,5 @@
+option(BERNIERI_CUSTOM_BUILD "Custom build for Bernieri Consulting" OFF)
+
 if(WIN32)
   set(HAVE_LANGUAGE_SELECTION TRUE)
 endif(WIN32)

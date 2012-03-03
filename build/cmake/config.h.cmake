@@ -1,6 +1,8 @@
 /* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+#cmakedefine BERNIERI_CUSTOM_BUILD
+
 /* Define if compiling for the Win32 platform */
 #cmakedefine PLATFORM_OS_WIN32 
 #cmakedefine PLATFORM_OS_WIN32_NATIVE
