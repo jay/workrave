@@ -75,8 +75,13 @@ DailyLimitWindow::create_gui()
   Gtk::VBox *box = new Gtk::VBox(false, 12);
   box->pack_start(*hbox, Gtk::EXPAND | Gtk::FILL, 0);
 
+// Customer request: Remove lock button
+#ifdef BERNIERI_CUSTOM_BUILD
+  Gtk::HButtonBox *button_box = create_break_buttons(false, true);
+#else
   // Button box at the bottom.
   Gtk::HButtonBox *button_box = create_break_buttons(true, true);
+#endif
   if (button_box)
     {
       box->pack_start(*Gtk::manage(button_box), Gtk::EXPAND | Gtk::FILL, 0);
