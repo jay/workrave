@@ -163,7 +163,7 @@ msgstr "Impossibile connettersi al client %s."
 #: ../frontend/gtkmm/src/IndicatorAppletMenu.cc:133
 #: ../frontend/gtkmm/src/win32/W32AppletMenu.cc:118
 msgid "Reading mode"
-msgstr ""
+msgstr "MODO LETTURA"
 
 #: ../frontend/applets/gnome2/src/GNOME_WorkraveApplet.xml.in.h:2
 msgid "_About..."
@@ -380,12 +380,12 @@ msgstr "%s%d secondi"
 #: ../frontend/gtkmm/src/BreakWindow.cc:309
 #, fuzzy
 msgid "_Lock"
-msgstr "_Blocca"
+msgstr "Blocca il PC"
 
 #: ../frontend/gtkmm/src/BreakWindow.cc:332
 #, fuzzy
 msgid "Shut _down"
-msgstr "Spegni"
+msgstr "Spegni il PC"
 
 #: ../frontend/gtkmm/src/BreakWindow.cc:353
 #, fuzzy
@@ -403,9 +403,9 @@ msgid ""
 "behind the computer. If your working day is not over yet,\n"
 "find something else to do, such as reviewing a document."
 msgstr ""
-"Hai raggiunto il tuo limite giornaliero. Interrompi il tuo\n"
-"lavoro al computer. Se la tua giornata lavorativa non è ancora\n"
-"terminata trova qualcos'altro da fare, come "
+"Hai raggiunto il limite giornaliero di uso del PC.\n"
+"Interrompi il tuo lavoro o cambia attività.\n"
+"Questo limite è fissato per la tua sicurezza."
 
 #: ../frontend/gtkmm/src/GUI.cc:302
 msgid ""
@@ -455,7 +455,7 @@ msgstr "Micropausa"
 #: ../frontend/gtkmm/src/RestBreakWindow.cc:81
 #: ../frontend/gtkmm/src/RestBreakWindow.cc:224
 msgid "Rest break"
-msgstr "Riposo"
+msgstr "Cambio di attività"
 
 #: ../frontend/gtkmm/src/GUI.cc:1519 ../frontend/gtkmm/src/GUI.cc:1523
 #, fuzzy
@@ -557,11 +557,11 @@ msgstr "_Esci"
 
 #: ../frontend/gtkmm/src/MainGtkMenu.cc:153
 msgid "_Reading mode"
-msgstr ""
+msgstr "MODO _LETTURA"
 
 #: ../frontend/gtkmm/src/MicroBreakWindow.cc:239
 msgid "Please relax for a few seconds"
-msgstr "Rilassati per alcuni secondi"
+msgstr "Alzati, muoviti e guarda lontano per alcuni secondi."
 
 #: ../frontend/gtkmm/src/MicroBreakWindow.cc:246
 #, c-format
@@ -591,7 +591,7 @@ msgstr "Generale"
 #: ../frontend/gtkmm/src/PreferencesDialog.cc:98
 #, fuzzy
 msgid "Sounds"
-msgstr "Suoni:"
+msgstr "Suoni"
 
 #: ../frontend/gtkmm/src/PreferencesDialog.cc:102
 msgid "Status Window"
@@ -745,22 +745,22 @@ msgstr "Dovresti fermarti per oggi..."
 #: ../frontend/gtkmm/src/PreludeWindow.cc:320
 #, fuzzy, c-format
 msgid "Break in %s"
-msgstr "In pausa"
+msgstr "Pausa in %s"
 
 #: ../frontend/gtkmm/src/PreludeWindow.cc:324
 #, fuzzy, c-format
 msgid "Disappears in %s"
-msgstr "Scompare tra"
+msgstr "Scompare in %s"
 
 #: ../frontend/gtkmm/src/PreludeWindow.cc:328
 #, fuzzy, c-format
 msgid "Silent in %s"
-msgstr "Silenzioso"
+msgstr "Silenzioso in %s"
 
 #: ../frontend/gtkmm/src/RestBreakWindow.cc:176
 #, c-format
 msgid "Rest break for %s"
-msgstr "Riposo per %s"
+msgstr "Cambio di attività per %s"
 
 #: ../frontend/gtkmm/src/RestBreakWindow.cc:218
 #, fuzzy
