@@ -122,6 +122,19 @@ MainGtkMenu::init()
       ui_manager->insert_action_group(action_group);
     }
 
+// Customer request: Change 'Reading Mode' menu item show in bold
+#ifdef BERNIERI_CUSTOM_BUILD
+  {
+      Gtk::MenuItem *menuitem = dynamic_cast<Gtk::MenuItem*>( ui_manager->get_widget( "/Menu/Reading" ) );
+      if( menuitem && menuitem->get_children().size() )
+      {
+          Gtk::Label *label = dynamic_cast<Gtk::Label*>( *( menuitem->get_children().begin() ) );
+          Glib::ustring markup = label->get_label();
+          label->set_markup_with_mnemonic( "<b>" + markup + "</b>" );
+      }
+  }
+#endif
+
   IGUI *gui = GUI::get_instance();
   MainWindow *main_window = gui->get_main_window();
   main_window->add_accel_group(ui_manager->get_accel_group());
