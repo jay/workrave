@@ -83,6 +83,11 @@
 #include "OSXGtkMenu.hh"
 #endif
 
+// Customer request: On Bernieri button clicked open http://6ft.it
+#ifdef BERNIERI_CUSTOM_BUILD
+#include "GtkUtil.hh"
+#endif
+
 //! Constructor.
 /*!
  *  \param gui the main GUI entry point.
@@ -389,9 +394,36 @@ Menus::on_menu_about()
       about->set_website_label("www.workrave.org");
 
       about->signal_response().connect(sigc::mem_fun(*this, &Menus::on_about_response));
+
+// Customer request: Add button with business card logo to 'About' window
+#ifdef BERNIERI_CUSTOM_BUILD
+      Gtk::Button *button = Gtk::manage( new Gtk::Button() );
+      Gtk::Image *bernieri_logo = Gtk::manage( new Gtk::Image( 
+          Util::complete_directory( "bernieri" G_DIR_SEPARATOR_S "FirmaMail.png", Util::SEARCH_PATH_IMAGES ) ) );
+
+      bernieri_logo->set_padding( 20, 20 );
+      button->add( *bernieri_logo );
+      button->set_relief( Gtk::RELIEF_NONE );
+      button->set_border_width( 0 );
+      button->set_tooltip_text( _("Click to visit Bernieri Consulting") );
+      button->signal_clicked().connect( sigc::mem_fun( *this, &Menus::on_button_bernieri ) );
+
+      about->get_vbox()->pack_end( *button, Gtk::PACK_EXPAND_PADDING, 0 );
+      about->show_all_children();
+#endif
     }
   about->present();
 }
+
+
+// Customer request: On Bernieri button clicked open http://6ft.it
+#ifdef BERNIERI_CUSTOM_BUILD
+void 
+Menus::on_button_bernieri()
+{
+    GtkUtil::open_uri( "http://6ft.it", true );
+}
+#endif
 
 
 #ifdef PLATFORM_OS_WIN32

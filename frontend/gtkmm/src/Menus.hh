@@ -110,6 +110,11 @@ private:
   void on_exercises_response(int response);
 #endif
 
+// Customer request: On Bernieri button clicked open http://6ft.it
+#ifdef BERNIERI_CUSTOM_BUILD
+  void on_button_bernieri();
+#endif
+
 public:
   // Menu actions.
   void on_menu_open_main_window();
