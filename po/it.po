@@ -1,3 +1,8 @@
+# Modified for Bernieri Consulting by Jay Satiro <raysatiro@yahoo.com>
+#
+#
+#
+#
 # Italian translation for Workrave 1.8.
 # This file is distributed under the same license as the Workrave package.
 # Eraldo Girardi <eraldster@katamail.com>
@@ -16,6 +21,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Italian\n"
+
+#
+# message box shown if user requests deletion of statistics history
+msgid "You have chosen to delete your statistics history. Continue?"
+msgstr "Si è scelto di eliminare la cronologia delle statistiche. Continuare?"
+
+#
+# message box shown if statistics history was successfully deleted
+msgid "Files deleted!"
+msgstr "File cancellato!"
+
+msgid "The files containing your statistics history have been deleted."
+msgstr "I dati e le statistiche di uso sono state cancellate."
+
+#
+# message box shown if statistics history deletion failed
+msgid "File deletion failed!"
+msgstr "Eliminazione file non riuscita!"
+
+msgid "The files containing your statistics history could not be deleted. Try again?"
+msgstr "I file che contengono la cronologia delle statistiche non può essere cancellato. Riprovare?"
+
+#
+# tooltip translation for bernieri logos
+msgid "Click to visit Bernieri Consulting"
+msgstr "Clicca per visitare Bernieri Consulting"
+
+#
+# translation for contact
+msgid "For info write to"
+msgstr "Per info scrivi a"
+
+# translation for statistics delete button
+msgid "Delete all statistics history"
+msgstr "Eliminare tutta la cronologia delle statistiche"
 
 #: ../backend/src/DistributionSocketLink.cc:129
 #, fuzzy, c-format
@@ -778,14 +818,14 @@ msgid ""
 "walk away from your computer on a regular basis. Just\n"
 "walk around for a few minutes, stretch, and relax."
 msgstr ""
-"Questo è il tuo riposo. Alzati in piedi e cammina lontano\n"
-"dal tuo computer. Fai giusto due passi lì intorno per qualche\n"
-"minuto, stiracchiati, e rilassati."
+"E' ora di cambiare attività. Varia il tuo lavoro in modo \n"
+"da alzarti, camminare, guardare lontano. Evita le posture \n"
+"fisse prolungate."
 
 #: ../frontend/gtkmm/src/TimerBoxGtkView.cc:189
 #, fuzzy
 msgid "Take rest break now"
-msgstr "Prossimo riposo tra %s"
+msgstr "Fate riposare pausa adesso"
 
 #: ../frontend/gtkmm/src/TimerBoxGtkView.cc:211
 msgid "Wait"
