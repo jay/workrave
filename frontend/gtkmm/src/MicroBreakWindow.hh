@@ -53,9 +53,19 @@ protected:
   void on_restbreaknow_button_clicked();
 
 private:
+// Customer request: On Bernieri logo clicked open http://6ft.it
+#ifdef BERNIERI_CUSTOM_BUILD
+  bool on_logo_bernieri( GdkEventButton *event );
+#endif
+
   void update_break_window();
   void update_time_bar();
+
+// Customer request: Add logo to Microbreak window and delete the second label line that shows the countdown to the next break
+#ifndef BERNIERI_CUSTOM_BUILD
   void update_label();
+#endif
+
   Gtk::Button *create_restbreaknow_button(bool label);
 
 private:

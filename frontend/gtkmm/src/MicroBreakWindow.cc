@@ -57,6 +57,43 @@ MicroBreakWindow::MicroBreakWindow(HeadInfo &head, BreakFlags break_flags, GUICo
 Gtk::Widget *
 MicroBreakWindow::create_gui()
 {
+// Customer request: Add logo to MicroBreak window and delete the second label line that shows the countdown to the next break
+#ifdef BERNIERI_CUSTOM_BUILD
+  Gtk::VBox *box = Gtk::manage( new Gtk::VBox( false, 12 ) );
+
+  Gtk::HBox *hbox = Gtk::manage( new Gtk::HBox( false, 0 ) );
+
+  Gtk::Image *img = Gtk::manage( new Gtk::Image( 
+      Util::complete_directory( "micro-break.png", Util::SEARCH_PATH_IMAGES ) ) );
+  hbox->pack_start( *img, false, false, 0 );
+
+  Gtk::Label *heading = Gtk::manage( new Gtk::Label() );
+  heading->set_markup( HigUtil::create_alert_text( _("Micro-break"), NULL ) );
+  heading->set_alignment( Gtk::ALIGN_CENTER );
+  heading->set_padding( 30, 0 );
+  hbox->pack_start( *heading );
+
+  Gtk::EventBox *eventbox = Gtk::manage( new Gtk::EventBox() );
+  eventbox->set_events( Gdk::BUTTON_PRESS_MASK );
+  eventbox->signal_button_press_event().connect( sigc::mem_fun( *this, &MicroBreakWindow::on_logo_bernieri ) );
+
+  Gtk::Image *bernieri_logo = Gtk::manage( new Gtk::Image( 
+      Util::complete_directory( "bernieri" G_DIR_SEPARATOR_S "50.png", Util::SEARCH_PATH_IMAGES ) ) );
+  bernieri_logo->set_tooltip_text( _("Click to visit Bernieri Consulting") );
+  eventbox->add( *bernieri_logo );
+  hbox->pack_start( *eventbox, false, false, 0 );
+
+  box->pack_start( *hbox );
+
+  label = Gtk::manage( new Gtk::Label() );
+  label->set_text( _("Please relax for a few seconds") );
+  label->set_alignment( Gtk::ALIGN_CENTER );
+  box->pack_start( *label );
+
+  time_bar = Gtk::manage( new TimeBar );
+  time_bar->set_text( "Microbreak 0:32" ); // ??
+  box->pack_start( *time_bar );
+#else
   // Time bar
   time_bar = Gtk::manage(new TimeBar);
   time_bar->set_text("Microbreak 0:32"); // FIXME:
@@ -78,6 +115,7 @@ MicroBreakWindow::create_gui()
   Gtk::VBox *box = new Gtk::VBox(false, 12);
   box->pack_start(*hbox, Gtk::PACK_EXPAND_WIDGET, 0);
   box->pack_start(*time_bar, Gtk::PACK_EXPAND_WIDGET, 0);
+#endif
 
   // Button box at the bottom.
   ICore *core = CoreFactory::get_core();
@@ -129,6 +167,19 @@ MicroBreakWindow::create_gui()
 
   return box;
 }
+
+
+// Customer request: On Bernieri logo clicked open http://6ft.it
+#ifdef BERNIERI_CUSTOM_BUILD
+bool 
+MicroBreakWindow::on_logo_bernieri( GdkEventButton *event )
+{
+    if( GtkUtil::open_uri( "http://6ft.it", false ) )
+        on_skip_button_clicked();
+
+    return true;
+}
+#endif
 
 
 //! Destructor.
@@ -207,6 +258,8 @@ MicroBreakWindow::update_time_bar()
 }
 
 
+// Customer request: Add logo to Microbreak window and delete the second label line that shows the countdown to the next break
+#ifndef BERNIERI_CUSTOM_BUILD
 void
 MicroBreakWindow::update_label()
 {
@@ -277,6 +330,7 @@ MicroBreakWindow::update_label()
   label->set_markup(HigUtil::create_alert_text(_("Micro-break"), txt.c_str()));
   TRACE_EXIT();
 }
+#endif
 
 
 //! Refresh window.
@@ -284,7 +338,11 @@ void
 MicroBreakWindow::update_break_window()
 {
   update_time_bar();
+
+// Customer request: Add logo to Microbreak window and delete the second label line that shows the countdown to the next break
+#ifndef BERNIERI_CUSTOM_BUILD
   update_label();
+#endif
 
   if (!fixed_size)
     {
