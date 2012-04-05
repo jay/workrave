@@ -282,7 +282,13 @@ ExercisesPanel::ExercisesPanel(Gtk::ButtonBox *dialog_action_area)
   //  size_group->add_widget(image_frame);
   //  size_group->add_widget(*description_widget);
   image.set_size_request(250, 250);
+
+#ifdef BERNIERI_CUSTOM_BUILD
+  // Wider exercise window so that the exercise texts are visible without scrolling
+  description_scroll.set_size_request(400, 200);
+#else
   description_scroll.set_size_request(250, 200);
+#endif
   // (end of ugly)
 
   back_button->signal_clicked()

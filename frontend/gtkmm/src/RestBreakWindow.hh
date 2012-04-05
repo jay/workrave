@@ -49,6 +49,18 @@ protected:
   void draw_time_bar();
 
 private:
+
+#ifdef BERNIERI_CUSTOM_BUILD
+  // Customer request: Add logo and contact info to RestBreakWindow
+  void on_label_size_alloc( Gtk::Allocation &a, Gtk::Label *label );
+
+  // Customer request: On Bernieri logo clicked open http://6ft.it
+  bool on_logo_bernieri( GdkEventButton *event );
+
+  // Customer request: On Bernieri contact info clicked open associated uri
+  bool on_activate_link( const Glib::ustring& uri );
+#endif
+
   void suspend_break();
   Gtk::Widget *create_info_panel();
   void set_ignore_activity(bool i);

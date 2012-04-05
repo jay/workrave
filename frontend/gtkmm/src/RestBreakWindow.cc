@@ -103,12 +103,51 @@ RestBreakWindow::create_gui()
   // Timebar
   timebar = Gtk::manage(new TimeBar);
   vbox->pack_start(*timebar, false, false, 6);
+  
+// Customer request: Add logo and contact info to RestBreakWindow
+#ifdef BERNIERI_CUSTOM_BUILD
+  Gtk::HBox *hbox = Gtk::manage( new Gtk::HBox );
 
+  Gtk::EventBox *eventbox = Gtk::manage( new Gtk::EventBox() );
+  eventbox->set_events( Gdk::BUTTON_PRESS_MASK );
+  eventbox->signal_button_press_event().connect( sigc::mem_fun( *this, &RestBreakWindow::on_logo_bernieri ) );
+
+  Gtk::Image *bernieri_logo = Gtk::manage( new Gtk::Image( 
+      Util::complete_directory( "bernieri" G_DIR_SEPARATOR_S "50.png", Util::SEARCH_PATH_IMAGES ) ) );
+  bernieri_logo->set_tooltip_text( _("Click to visit Bernieri Consulting") );
+  eventbox->add( *bernieri_logo );
+  hbox->pack_start( *eventbox, false, false, 0 );
+
+  Gtk::Label *label = Gtk::manage( new Gtk::Label );
+  Glib::ustring contact;
+  contact += "<span weight=\"bold\" size=\"smaller\" color=\"blue\">";
+  contact += _("For info write to");
+  contact += " <a href=\"mailto:vdt@6ft.it\">vdt@6ft.it</a>";
+  contact += "\n";
+  contact += "<a href=\"http://www.berniericonsulting.com\">www.berniericonsulting.com</a>";
+  contact += "</span>";
+  label->set_markup( contact );
+  label->set_track_visited_links( false );
+  label->set_justify( Gtk::JUSTIFY_CENTER );
+  label->set_can_focus( false );
+  label->signal_activate_link().connect( sigc::mem_fun( *this, &RestBreakWindow::on_activate_link ), false );
+  hbox->pack_start( *label, false, false, 10 );
+  
+  Gtk::HButtonBox *button_box = create_break_buttons( true, false );
+  if( button_box )
+  {
+      button_box->set_manage();
+      hbox->pack_end( *button_box, false, false, 0 );
+  }
+  
+  vbox->pack_end( *hbox, Gtk::PACK_SHRINK, 0 );
+#else
   Gtk::HButtonBox *button_box = create_break_buttons(true, false);
   if (button_box)
     {
       vbox->pack_end(*Gtk::manage(button_box), Gtk::PACK_SHRINK, 6);
     }
+#endif
 
   return vbox;
 }
@@ -227,11 +266,110 @@ RestBreakWindow::create_info_panel()
            "walk around for a few minutes, stretch, and relax."));
     }
 
+// Customer request: Add logo and contact info to RestBreakWindow
+#ifdef BERNIERI_CUSTOM_BUILD
+  // The rest break window will not be the traditional size so the pre-wrapped text must be unwrapped.
+  info_lab->set_markup( GtkUtil::unwrap_txt( txt ) );
+
+  // The text goes in a label that's dynamically resized and is wrapped dynamically.
+  info_lab->set_alignment( 0.0, 0.0 );
+  info_lab->set_line_wrap( true );
+  info_lab->set_line_wrap_mode( Pango::WRAP_WORD );
+  info_lab->signal_size_allocate().connect( 
+      sigc::bind<Gtk::Label *>( sigc::mem_fun( *this, &RestBreakWindow::on_label_size_alloc ), info_lab ) );
+
+   info_box->pack_start(*info_img, false, false, 0);
+   // For the label wrap resize to work properly it must receive the extra allocated space.
+   info_box->pack_start(*info_lab, true, true, 0);
+#else
   info_lab->set_markup(txt);
   info_box->pack_start(*info_img, false, false, 0);
   info_box->pack_start(*info_lab, false, true, 0);
+#endif
+
   return info_box;
 }
+
+
+// Customer request: Add logo and contact info to RestBreakWindow
+#ifdef BERNIERI_CUSTOM_BUILD
+/* This is a GTK hack to resize the rest break label relative to its parent's size.
+In create_info_panel() I unwrap the "pre-wrapped" multi-line rest break text.
+The rest break text will be dynamically wrapped to the label's width the help of this function.
+
+requires:
+label->set_alignment( 0.0, 0.0 );
+label->set_line_wrap( true );
+label->set_line_wrap_mode( Pango::WRAP_WORD );
+label->signal_size_allocate().connect( 
+      sigc::bind<Gtk::Label *>( sigc::mem_fun( *this, &RestBreakWindow::on_label_size_alloc ), label ) );
+
+Written based on these articles:
+http://python.6.n6.nabble.com/Label-amp-Word-Wrapping-td1944165.html
+http://stackoverflow.com/questions/1893748/pygtk-dynamic-label-wrapping/1911179
+http://www.16software.com/blog/dynamic-label-wrapping-in-gtk
+*/
+void 
+RestBreakWindow::on_label_size_alloc( Gtk::Allocation &a, Gtk::Label *label )
+{
+    static const Glib::Quark quark = "on_label_size_alloc";
+    int width = a.get_width();
+    int pango_width = ( width * Pango::SCALE );
+    int height = a.get_height();
+   
+    if( !label )
+        return;
+
+
+    /* pango change is needed, set_size_req is insufficient on its own. take eng rest break text for example:
+    hit x on exercise panel, label not fully resized without pango update.
+    pango insufficient on its own as well. for example
+    "AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA "
+    "AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA "
+    "AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA "
+    "AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAA AAAAAAAAB "
+    */
+    if( ( width > 1 ) 
+        && ( width != GPOINTER_TO_INT( label->get_data( quark ) ) ) 
+        && ( pango_width != label->get_layout()->get_width() ) 
+        )
+    {
+        label->set_allocation( a );
+        label->get_layout()->set_width( pango_width );
+        label->set_size_request( width );
+        label->queue_resize();
+    }
+    else
+        width = 0;
+
+    label->set_data( quark, GINT_TO_POINTER( width ) );
+}
+#endif
+
+// Customer request: On Bernieri logo clicked open http://6ft.it
+#ifdef BERNIERI_CUSTOM_BUILD
+bool 
+RestBreakWindow::on_logo_bernieri( GdkEventButton *event )
+{
+    if( GtkUtil::open_uri( "http://6ft.it", false ) )
+        on_skip_button_clicked();
+
+    return true;
+}
+#endif
+
+// Customer request: On Bernieri contact info clicked open associated uri
+#ifdef BERNIERI_CUSTOM_BUILD
+bool 
+RestBreakWindow::on_activate_link( const Glib::ustring& uri )
+{
+    if( GtkUtil::open_uri( uri, false ) )
+        on_skip_button_clicked();
+
+    return true;
+}
+#endif
+
 
 #ifdef HAVE_EXERCISES
 void
@@ -294,7 +432,13 @@ RestBreakWindow::install_info_panel()
 
   set_ignore_activity(false);
   clear_pluggable_panel();
+// Customer request: Add logo and contact info to RestBreakWindow
+#ifdef BERNIERI_CUSTOM_BUILD
+  // for the label wrap resize to work properly its parent container must be able to expand
+  pluggable_panel->pack_start( *(create_info_panel()), true, true, 0 );
+#else
   pluggable_panel->pack_start(*(create_info_panel()), false, false, 0);
+#endif
   pluggable_panel->show_all();
   pluggable_panel->queue_resize();
 
