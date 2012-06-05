@@ -56,20 +56,38 @@ struct Defaults
     {
       // FIXME: Rename to micro_break, but in a backwards compatible manner.
       "micro_pause",
+// Customer request: Default Pref: MicroBreak: Break every 20 min. Duration 30 sec. Postpone 1 min.
+#ifdef BERNIERI_CUSTOM_BUILD
+      20*60, 30, "", 1*60,
+      0,
+#else
       3*60, 30, "", 150,
       3,
+#endif
     },
 
     {
       "rest_break",
+// Customer request: Default Pref: RestBreak: Break every 2 hrs. Duration 15 min. Postpone 2 min.
+#ifdef BERNIERI_CUSTOM_BUILD
+      2*60*60, 15*60, "", 2*60,
+      0,
+#else
       45*60, 10*60, "", 180,
       3,
+#endif
     },
 
     {
       "daily_limit",
+// Customer request: Default Pref: DailyLimit: Break every 10 hrs. Postpone 20 min.
+#ifdef BERNIERI_CUSTOM_BUILD
+      10*60*60, 0, "day/10:00", 20*60,
+      0,
+#else
       14400, 0, "day/4:00", 20 * 60,
       3,
+#endif
     }
   };
 
@@ -194,6 +212,14 @@ Break::init_defaults()
                     def.snooze,
                     CONFIG_FLAG_DEFAULT);
 
+// Customer request: Default Pref: DailyLimit: Regard micro-breaks as activity
+#ifdef BERNIERI_CUSTOM_BUILD
+  if( break_id == BREAK_ID_DAILY_LIMIT )
+  {
+      config->set_value( ( CoreConfig::CFG_KEY_TIMER_MONITOR % break_id ), "micro_pause", CONFIG_FLAG_DEFAULT );
+  }
+  else
+#endif
   config->set_value(CoreConfig::CFG_KEY_TIMER_MONITOR % break_id,
                     "",
                     CONFIG_FLAG_DEFAULT);

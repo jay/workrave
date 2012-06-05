@@ -158,6 +158,32 @@ TimerBoxControl::init()
       break_slot_cycle[i] = 0;
     }
 
+#ifdef BERNIERI_CUSTOM_BUILD
+  if( name == "applet" )
+  {
+	  // Customer request: Default Pref: Applet: Disable
+	  config->set_value( CFG_KEY_TIMERBOX + name + CFG_KEY_TIMERBOX_ENABLED, false, CONFIG_FLAG_DEFAULT );
+
+	  // Customer request: Default Pref: Applet: Display > Placement: Place timers next to each other
+	  config->set_value( get_timer_config_key( name, BREAK_ID_MICRO_BREAK, CFG_KEY_TIMERBOX_POSITION ), 0, CONFIG_FLAG_DEFAULT );
+	  config->set_value( get_timer_config_key( name, BREAK_ID_REST_BREAK, CFG_KEY_TIMERBOX_POSITION ), 1, CONFIG_FLAG_DEFAULT );
+	  config->set_value( get_timer_config_key( name, BREAK_ID_DAILY_LIMIT, CFG_KEY_TIMERBOX_POSITION ), 2, CONFIG_FLAG_DEFAULT );
+
+	  // Customer request: Default Pref: Applet: Timers > Daily limit: Show only when this timer is first due
+	  config->set_value( get_timer_config_key( name, BREAK_ID_DAILY_LIMIT, CFG_KEY_TIMERBOX_FLAGS ), BREAK_WHEN_FIRST, CONFIG_FLAG_DEFAULT );
+  }
+  else if( name == "main_window" )
+  {
+	  // Customer request: Default Pref: Status Window: Display > Placement: Place rest break and daily limit in one spot
+	  config->set_value( get_timer_config_key( name, BREAK_ID_MICRO_BREAK, CFG_KEY_TIMERBOX_POSITION ), 0, CONFIG_FLAG_DEFAULT );
+	  config->set_value( get_timer_config_key( name, BREAK_ID_REST_BREAK, CFG_KEY_TIMERBOX_POSITION ), 1, CONFIG_FLAG_DEFAULT );
+	  config->set_value( get_timer_config_key( name, BREAK_ID_DAILY_LIMIT, CFG_KEY_TIMERBOX_POSITION ), 1, CONFIG_FLAG_DEFAULT );
+
+	  // Customer request: Default Pref: Status Window: Timers > Daily limit: Show only when this timer is first due
+	  config->set_value( get_timer_config_key( name, BREAK_ID_DAILY_LIMIT, CFG_KEY_TIMERBOX_FLAGS ), BREAK_WHEN_FIRST, CONFIG_FLAG_DEFAULT );
+  }
+#endif
+
   // Load the configuration
   read_configuration();
 

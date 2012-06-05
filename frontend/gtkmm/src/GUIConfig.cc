@@ -65,12 +65,25 @@ GUIConfig::init()
                         i == BREAK_ID_REST_BREAK ? 3 : 0,
                         CONFIG_FLAG_DEFAULT);
 
+// Customer request: Default Pref: RestBreak: Start restbreak when screen is locked
+#ifdef BERNIERI_CUSTOM_BUILD
+      if( (BreakId)i == BREAK_ID_REST_BREAK )
+      {
+          config->set_value( ( CFG_KEY_BREAK_AUTO_NATURAL % ((BreakId)i) ), true, CONFIG_FLAG_DEFAULT );
+      }
+      else
+#endif
       config->set_value(CFG_KEY_BREAK_AUTO_NATURAL % ((BreakId)i),
                         false,
                         CONFIG_FLAG_DEFAULT);
     }
 
+// Customer request: Default Pref: General: No blocking
+#ifdef BERNIERI_CUSTOM_BUILD
+  config->set_value( CFG_KEY_BLOCK_MODE, BLOCK_MODE_NONE, CONFIG_FLAG_DEFAULT );
+#else
   config->set_value(CFG_KEY_BLOCK_MODE, BLOCK_MODE_INPUT, CONFIG_FLAG_DEFAULT);
+#endif
   config->set_value(CFG_KEY_TRAYICON_ENABLED, true, CONFIG_FLAG_DEFAULT);
   config->set_value(CFG_KEY_CLOSEWARN_ENABLED, true, CONFIG_FLAG_DEFAULT);
 }

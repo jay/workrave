@@ -351,6 +351,10 @@ SoundPlayer::init()
       mixer->init();
     }
 
+// Customer request: Default Pref: Sounds: Volume @50
+#ifdef BERNIERI_CUSTOM_BUILD
+  CoreFactory::get_configurator()->set_value( CFG_KEY_SOUND_VOLUME, 50, CONFIG_FLAG_DEFAULT );
+#else
   int volume = 0;
   if( !CoreFactory::get_configurator()->get_value(CFG_KEY_SOUND_VOLUME, volume) )
     {
@@ -358,6 +362,12 @@ SoundPlayer::init()
       // This doesn't belong here if Workrave won't honor it on all platforms.
       CoreFactory::get_configurator()->set_value(CFG_KEY_SOUND_VOLUME, (int)100);
     }
+#endif
+
+// Customer request: Default Pref: Sounds: Mute sounds during rest break and daily limit
+#ifdef BERNIERI_CUSTOM_BUILD
+  CoreFactory::get_configurator()->set_value( CFG_KEY_SOUND_MUTE, true, CONFIG_FLAG_DEFAULT );
+#endif
 
   // first call will set enabled if no setting not found
   is_enabled();
@@ -374,7 +384,12 @@ SoundPlayer::register_sound_events(string theme)
   TRACE_ENTER_MSG("SoundPlayer::register_sound_events", theme);
   if (theme == "")
     {
+// Customer request: Default Pref: Sounds: 'Subtle' theme
+#ifdef BERNIERI_CUSTOM_BUILD
+      theme = "subtle";
+#else
       theme = "default";
+#endif
     }
 
   sync_settings();
