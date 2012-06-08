@@ -65,14 +65,6 @@ GUIConfig::init()
                         i == BREAK_ID_REST_BREAK ? 3 : 0,
                         CONFIG_FLAG_DEFAULT);
 
-// Customer request: Default Pref: RestBreak: Start restbreak when screen is locked
-#ifdef BERNIERI_CUSTOM_BUILD
-      if( (BreakId)i == BREAK_ID_REST_BREAK )
-      {
-          config->set_value( ( CFG_KEY_BREAK_AUTO_NATURAL % ((BreakId)i) ), true, CONFIG_FLAG_DEFAULT );
-      }
-      else
-#endif
       config->set_value(CFG_KEY_BREAK_AUTO_NATURAL % ((BreakId)i),
                         false,
                         CONFIG_FLAG_DEFAULT);
