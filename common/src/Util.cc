@@ -296,6 +296,12 @@ Util::get_search_path(SearchPathId type)
 #elif defined(PLATFORM_OS_WIN32)
 #if defined(DATA_PATH)
  	    searchPath.insert(string(DATA_PATH) + "frontend\\common\\share\\images");
+
+// Customer images pre-build are stored in custom\bernieri\installer\redist\share\images
+#ifdef BERNIERI_CUSTOM_BUILD
+        searchPath.insert(string(DATA_PATH) + "custom\\bernieri\\installer\\redist\\share\\images");
+#endif
+
 #endif
       searchPath.insert(app_dir + "\\share\\images");
 
