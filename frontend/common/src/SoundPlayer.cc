@@ -364,11 +364,6 @@ SoundPlayer::init()
     }
 #endif
 
-// Customer request: Default Pref: Sounds: Mute sounds during rest break and daily limit
-#ifdef BERNIERI_CUSTOM_BUILD
-  CoreFactory::get_configurator()->set_value( CFG_KEY_SOUND_MUTE, true, CONFIG_FLAG_DEFAULT );
-#endif
-
   // first call will set enabled if no setting not found
   is_enabled();
 
