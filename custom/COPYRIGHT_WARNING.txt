@@ -1,0 +1,8 @@
+A customer's identifying images and logos in this directory or any subdirectory herein are 
+copyright that customer. They are not covered by the GPL unless specifically stated. If you are 
+adapting one of our custom installers for your own needs make sure you remove all of our customer's 
+images/logos and any text or links that could incorrectly associate them with your installer.
+
+Please also remember that all other files including the installer script files are GPLv3 and 
+therefore if you make changes to them that will be redistributed you must also make available the 
+source for those changes. Workrave is covered by the GPLv3 license. Please review License_GPLv3.rtf

@@ -1,0 +1,114 @@
+All the extra data needed to build the custom edition of Workrave for Bernieri Consulting is 
+contained within this folder and any subfolders. You must be working from the bernieri branch 
+source to build this custom edition. If you are not using the bernieri branch source you likely 
+will not see any subfolders or other files in this folder.
+
+The bernieri branch can always be found here: https://github.com/jay/workrave/tree/bernieri
+
+This custom edition was targeted only for Windows XP/Vista/7 operating systems by customer request.
+
+====================================================================================================
+
+Please first review workrave\build\cmake\README. The directions here are slightly different. I 
+built using the following:
+
+Microsoft Visual Studio 2010 Professional SP1Rel
+f0ed50712d83bf0eda7d284da76df49e4c88cef7 *en_Visual_Studio2010_Professional_x86_x16-81637.iso
+61c2088850185ede8e18001d1ef3e6d12daa5692 *VS2010SP1dvd1.iso
+
+Windows 7 SDK (7.0)
+http://www.microsoft.com/en-us/download/details.aspx?id=18950
+x86 OS:
+8695f5e6810d84153181695da78850988a923f4e *GRMSDK_EN_DVD.iso
+x64 OS:
+3393c98b8468cb3505557854922707510f8b65e1 *GRMSDKX_EN_DVD.iso
+
+DirectX 9 SDK (June 2010)
+http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=6812
+8fe98c00fde0f524760bb9021f438bd7d9304a69 *DXSDK_Jun10.exe
+
+CMake 2.8
+http://www.cmake.org/cmake/resources/software.html
+http://www.cmake.org/files/v2.8/cmake-2.8.9-win32-x86.exe
+8f27def76a5c688058ab5b155fb3ebcc08a803b0 *cmake-2.8.9-win32-x86.exe
+
+Gtkmm 2.22.0
+https://live.gnome.org/gtkmm/MSWindows#Download
+ftp://ftp.gnome.org/pub/GNOME/binaries/win32/gtkmm/2.22/gtkmm-win32-devel-2.22.0-2.exe
+b1f3f4c7275ddb780a75bd24d3130991ee07db38 *gtkmm-win32-devel-2.22.0-2.exe
+
+Strawberry Perl 5.16
+http://strawberryperl.com/releases.html
+x86 OS:
+http://strawberryperl.com/download/5.16.1.1/strawberry-perl-5.16.1.1-32bit.msi
+00a1757af17a0d50d03bfc0f7a16d343e2cc43ad *strawberry-perl-5.16.1.1-32bit.msi
+x64 OS:
+http://strawberryperl.com/download/5.16.1.1/strawberry-perl-5.16.1.1-64bit.msi
+e67728ddd89777815271ac7416cff32653d387bf *strawberry-perl-5.16.1.1-64bit.msi
+
+Intltool 0.40
+http://ftp.gnome.org/pub/gnome/binaries/win32/intltool/0.40/intltool_0.40.4-1_win32.zip
+e609c31dee8aa60b738c839ea958ec241109e1bd *intltool_0.40.4-1_win32.zip
+
+Gettext 0.18.1.1
+http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/gettext-runtime-dev_0.18.1.1-2_win32.zip
+http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/gettext-runtime_0.18.1.1-2_win32.zip
+http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/gettext-tools-dev_0.18.1.1-2_win32.zip
+5b0a30749a74c2567fb29cbb3f17959ca9e6a6dc *gettext-runtime-dev_0.18.1.1-2_win32.zip
+a7cc1ce2b99b408d1bbea9a3b4520fcaf26783b3 *gettext-runtime_0.18.1.1-2_win32.zip
+4cfbdf8589bf17868a133b9d039283e3e9b99b8d *gettext-tools-dev_0.18.1.1-2_win32.zip
+
+Python 2.7 (optional for DBUS: if you want it follow the directions in workrave\build\cmake\README)
+x86 OS:
+http://www.python.org/ftp/python/2.7.3/python-2.7.3.msi
+239bf7790b2f50581a96bebfcea536bdc1f385c8 *python-2.7.3.msi
+x64 OS:
+http://www.python.org/ftp/python/2.7.3/python-2.7.3.amd64.msi
+8e0d24e4e92709d1ab914f8d9e672156d54c3c50 *python-2.7.3.amd64.msi
+
+
+Assuming your base directory is eg: X:\Workrave
+Assuming your Workrave git repository is in eg: X:\Workrave\workrave
+Unzip intltool and gettext zips to a dependency directory eg: X:\Workrave\dependencies
+
+Install all the other files using their installers. There is one change required after you install 
+gtkmm. You must open c:\gtkmm\share\themes\MS-Windows\gtk-2.0\gtkrc in an editor that can read 
+linefeed-only text files (like Notepad++) and change the gtk-button-images option from 0 to 1.
+
+After installing everything above go to your Workrave git repository and checkout the commit you 
+want to build from the 'bernieri' branch.
+
+====================================================================================================
+
+I use two build directories:
+
+# I have one build directory with DEVELOPMENT_MODE=ON and this is primarily where I work using 
+# configuration 'Debug' to build 'ALL_BUILD'.
+pushd X:\Workrave
+mkdir bernieri\build_dev
+cd bernieri\build_dev
+cmake -G "Visual Studio 10" ..\..\workrave\build\cmake\ -DBERNIERI_CUSTOM_BUILD=ON -DDEVELOPMENT_MODE=ON -DFIND_DBUS=OFF -DLANG_FUZZY=it -DCMAKE_PREFIX_PATH="X:\Workrave\dependencies" -DCMAKE_INSTALL_PREFIX="%CD%\output_for_installer"
+
+# I have another build directory with DEVELOPMENT_MODE=OFF and this is where I build 'INSTALL' 
+# using configuration 'RelWithDebInfo'. Note: You cannot debug in VS when development mode is off.
+popd
+pushd X:\Workrave
+mkdir bernieri\build_install
+cd bernieri\build_install
+cmake -G "Visual Studio 10" ..\..\workrave\build\cmake\ -DBERNIERI_CUSTOM_BUILD=ON -DDEVELOPMENT_MODE=OFF -DFIND_DBUS=OFF -DLANG_FUZZY=it -DCMAKE_PREFIX_PATH="X:\Workrave\dependencies" -DCMAKE_INSTALL_PREFIX="%CD%\output_for_installer"
+
+====================================================================================================
+
+You must manually configure your debugging settings. In each Workrave.sln open and do the following:
+Right-click ALL_BUILD > Configuration Properties > Debugging
+Switch to configuration 'All Configurations'
+Change 'Command' to $(SolutionDir)\bin\$(Configuration)\workrave.exe
+Change 'Environment' to PATH=C:\gtkmm\bin;X:\Workrave\dependencies\bin;%PATH%
+
+Now you are ready to build Workrave in the configuration you want.
+
+====================================================================================================
+
+There are other optional files which are not built using Workrave.sln, but those files are needed 
+if you are building an installer to install the program. For information on that please review the 
+installer notes in custom\bernieri\installer\BUILD.txt
