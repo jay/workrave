@@ -1,0 +1,1 @@
+This is the 'Timers' part of Workrave's preferences panel. You can change the settings of any break by accessing the preferences panel via Workrave's popup menu.

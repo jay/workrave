@@ -1,0 +1,7 @@
+binaries/
+Output/
+
+# Copyrighted images
+redist/share/images/bernieri/50.png
+redist/share/images/bernieri/FirmaMail.png
+images_for_installer/Bernieri_Card.bmp

@@ -1,0 +1,4 @@
+This is Workrave's popup menu. You can change Workrave's behavior via its popup menu.
+
+Example: You could enable 'Reading Mode' so the timers will countdown even without cumulative input.
+Example: You could switch to 'Suspended' mode so Workrave will not interrupt you during a presentation.

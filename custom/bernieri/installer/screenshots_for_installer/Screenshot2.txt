@@ -1,0 +1,1 @@
+This is Workrave's Daily Limit window. The default setting for this Custom Edition of Workrave is to show the Daily Limit notice after 10 hours of cumulative input.

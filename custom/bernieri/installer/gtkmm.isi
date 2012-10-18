@@ -1,0 +1,50 @@
+[Files]
+;
+; These are the gtkmm redistributable files that Workrave needs, except for the gtkmm locale 
+; directory list which is stored separately in gtkmm_locales.isi, and the gtkrc theme files which 
+; are stored in the redist\share\themes and are already included.
+;
+; The list below includes the DLLs needed when Workrave is compiled using Visual Studio 2010 with 
+; the Workrave solution in a release configuration. If you are using a different configuration, a 
+; different version of Visual Studio or a different compiler you must include the respective 
+; redistributable DLLs. For more information please consult:
+; https://live.gnome.org/gtkmm/MSWindows#Redistributing
+;
+; The 'GtkmmPath' define in the beginning of setup.iss must be changed to your gtkmm directory.
+;
+Source: {#GtkmmPath}\etc\*.*; DestDir: {app}\etc; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\lib\gtk-2.0\*.*; DestDir: {app}\lib\gtk-2.0; Flags: {#DefaultFlags} recursesubdirs
+
+Source: {#GtkmmPath}\bin\atkmm-vc100-1_6.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\cairomm-vc100-1_0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\freetype6.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\gdkmm-vc100-2_4.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\giomm-vc100-2_4.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\glibmm-vc100-2_4.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\gspawn-win32-helper-console.exe; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\gspawn-win32-helper.exe; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\gtkmm-vc100-2_4.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\intl.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libatk-1.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libcairo-2.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libexpat-1.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libfontconfig-1.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgailutil-18.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgdk-win32-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgdk_pixbuf-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgio-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libglib-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgmodule-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgobject-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgthread-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libgtk-win32-2.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libpango-1.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libpangocairo-1.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libpangoft2-1.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libpangowin32-1.0-0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libpng14-14.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\libxml2-2.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\pangomm-vc100-1_4.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\sigc-vc100-2_0.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\xml++-vc100-2_6.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}
+Source: {#GtkmmPath}\bin\zlib1.dll; DestDir: {app}\lib; Flags: {#DefaultFlags}

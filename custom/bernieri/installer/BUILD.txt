@@ -1,0 +1,83 @@
+This directory contains the data needed to build the custom installer for Bernieri Consulting.
+If you are not building for Bernieri Consulting make sure you remove all user visible references to 
+them in subfolder redist, and in the Workrave source (all over) and any identifying images/logos.
+
+====================================================================================================
+
+Open the parent directory's BUILD.txt for information on how to build Workrave. As noted you should 
+build Workrave using the release with debug info ('RelWithDebInfo') configuration and with 
+cmake DEVELOPMENT_MODE=OFF when you are building for install.
+
+- Open X:\Workrave\bernieri\build_install\Workrave.sln
+- Switch to 'RelWithDebInfo'
+- Build the 'INSTALL' configuration
+
+The core Workrave files will be output to X:\workrave\bernieri\build_install\output_for_installer.
+The pdb debug info files are not copied to the installer directory or used by the installer. They 
+can be found in X:\Workrave\bernieri\build_install\bin\RelWithDebInfo. Make sure to save them and 
+note which commit you built from.
+
+====================================================================================================
+
+You will also need to build the files which while optional for debugging are required for 
+deployment. This includes both the 32-bit and 64-bit versions of Workrave's applet and 
+supporting files needed by the installer.
+
+
+# Open a _new_ command window and build the applets:
+pushd X:\Workrave\workrave\frontend\applets\win32\src
+buildall.cmd
+# Close window
+
+
+# Open a _new_ command window and build the 64-bit version of harpoon and its helper:
+pushd X:\Workrave\workrave\common\win32
+buildone.cmd RELEASE64
+# Close window
+
+
+# Switch to the output directory and build ChangeAutorun.exe and libzapper-0.dll
+# You must build both linking to either:
+# 1) Static CRT
+# 2) Standard CRT DLL msvcrt.dll only
+# 
+# Basically you'll need to avoid a situation where the installer won't install properly because 
+# there is a dependency on a specific version of the CRT, which may not be installed on the user's 
+# computer. The installer includes only the redistributable Visual Studio CRT DLLs used to build 
+# workrave.exe
+
+# To do (1) to link to the static CRT using Visual Studio cl.exe:
+# Open a Visual Studio *x86* command window and build ChangeAutorun.exe and libzapper-0.dll
+pushd X:\Workrave\workrave\custom\bernieri\installer
+mkdir binaries
+cd binaries
+cl /W4 /MT /DUNICODE ..\..\..\..\frontend\gtkmm\win32\setup\src\ChangeAutorun.c
+cl /W4 /LD ..\..\..\..\frontend\gtkmm\win32\setup\src\zapper.c /Felibzapper-0
+popd
+
+# Or you can do (2) easily if you have MinGW, which in its default configuration links to msvcrt.dll
+# Open a _new_ command window and build ChangeAutorun.exe and libzapper-0.dll using *x86* MinGW gcc
+pushd X:\Workrave\workrave\custom\bernieri\installer
+mkdir binaries
+cd binaries
+gcc -O2 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-parameter -DUNICODE -mwindows -o ChangeAutorun.exe ..\..\..\..\frontend\gtkmm\win32\setup\src\ChangeAutorun.c -lpsapi
+gcc -o libzapper-0.dll ..\..\..\..\frontend\gtkmm\win32\setup\src\zapper.c -shared
+# Close window
+
+
+====================================================================================================
+
+Install the installation builder:
+Inno Setup ANSI version (UNICODE version untested)
+http://www.jrsoftware.org/isdl.php#stable
+http://files.jrsoftware.org/is/5/isetup-5.5.2.exe
+1b17bc08540418dad460b1e1400b757e4826482b *isetup-5.5.2.exe
+
+====================================================================================================
+
+You must change the preprocessor defines in the beginning of setup.iss to reflect your build and 
+dependency directories. If you are compiling using anything other than Visual Studio 2010 in a 
+release type configuration (Release, RelWithDebInfo, etc) you must also edit the gtkmm.isi and 
+update it with the required dependencies.
+
+Now you are ready to build the installer by opening setup.iss in the Inno Setup Compiler.

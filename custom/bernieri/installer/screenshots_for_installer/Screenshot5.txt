@@ -1,0 +1,1 @@
+This is Workrave's status window. You can view the break timers in this window. You can show or hide the window by left-clicking Workrave's tray icon. You can also hide the window by left-clicking its red 'X' close button.

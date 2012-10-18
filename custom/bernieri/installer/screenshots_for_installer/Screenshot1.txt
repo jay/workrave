@@ -1,0 +1,1 @@
+This is Workrave's Restbreak window. The default setting for this Custom Edition of Workrave is to start a Restbreak after 2 hours of cumulative input.

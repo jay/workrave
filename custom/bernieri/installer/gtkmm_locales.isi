@@ -1,0 +1,44 @@
+[Files]
+;
+; These are the gtkmm redistributable locale directories needed by Workrave. This list is manually 
+; maintained and the locales required by Workrave may grow. Failure to update this list is not 
+; fatal but will result in some text for an unrecognized language being displayed in English.
+;
+; The 'GtkmmPath' define in the beginning of setup.iss must be changed to your gtkmm directory.
+;
+Source: {#GtkmmPath}\share\locale\bg\*.*; DestDir: {app}\lib\locale\bg; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\ca\*.*; DestDir: {app}\lib\locale\ca; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\cs\*.*; DestDir: {app}\lib\locale\cs; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\da\*.*; DestDir: {app}\lib\locale\da; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\de\*.*; DestDir: {app}\lib\locale\de; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\el\*.*; DestDir: {app}\lib\locale\el; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\eo\*.*; DestDir: {app}\lib\locale\eo; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\es\*.*; DestDir: {app}\lib\locale\es; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\et\*.*; DestDir: {app}\lib\locale\et; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\eu\*.*; DestDir: {app}\lib\locale\eu; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\fa\*.*; DestDir: {app}\lib\locale\fa; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\fi\*.*; DestDir: {app}\lib\locale\fi; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\fr\*.*; DestDir: {app}\lib\locale\fr; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\ga\*.*; DestDir: {app}\lib\locale\ga; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\he\*.*; DestDir: {app}\lib\locale\he; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\hr\*.*; DestDir: {app}\lib\locale\hr; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\hu\*.*; DestDir: {app}\lib\locale\hu; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\it\*.*; DestDir: {app}\lib\locale\it; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\ja\*.*; DestDir: {app}\lib\locale\ja; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\ko\*.*; DestDir: {app}\lib\locale\ko; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\lt\*.*; DestDir: {app}\lib\locale\lt; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\nb\*.*; DestDir: {app}\lib\locale\nb; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\nl\*.*; DestDir: {app}\lib\locale\nl; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\pl\*.*; DestDir: {app}\lib\locale\pl; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\pt_BR\*.*; DestDir: {app}\lib\locale\pt_BR; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\ro\*.*; DestDir: {app}\lib\locale\ro; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\ru\*.*; DestDir: {app}\lib\locale\ru; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\sk\*.*; DestDir: {app}\lib\locale\sk; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\sl\*.*; DestDir: {app}\lib\locale\sl; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\sr@latin\*.*; DestDir: {app}\lib\locale\sr@latin; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\sv\*.*; DestDir: {app}\lib\locale\sv; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\te\*.*; DestDir: {app}\lib\locale\te; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\tr\*.*; DestDir: {app}\lib\locale\tr; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\uk\*.*; DestDir: {app}\lib\locale\uk; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\zh_CN\*.*; DestDir: {app}\lib\locale\zh_CN; Flags: {#DefaultFlags} recursesubdirs
+Source: {#GtkmmPath}\share\locale\zh_TW\*.*; DestDir: {app}\lib\locale\zh_TW; Flags: {#DefaultFlags} recursesubdirs

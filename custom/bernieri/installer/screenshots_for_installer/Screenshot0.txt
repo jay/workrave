@@ -1,0 +1,1 @@
+This is Workrave's Microbreak window. The default setting for this Custom Edition of Workrave is to start a Microbreak after 20 minutes of cumulative input.

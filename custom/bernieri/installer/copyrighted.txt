@@ -1,0 +1,21 @@
+As noted certain logos copyright Bernieri Consulting are not included here.
+
+
+These two images are needed by Workrave:
+
+# Small 50x50 logo for break windows
+redist/share/images/bernieri/50.png
+
+# Medium 474x200 business card image for about window
+redist/share/images/bernieri/FirmaMail.png
+
+
+This image is needed by its installer:
+
+# Medium 505x230 business card bmp image for about window
+images/Bernieri_Card.bmp
+
+
+You can see an example in the example_screenshots directory of what your windows should look like.
+The Bernieri Consulting logos shown in the examples are copyright Bernieri Consulting and cannot be 
+used in your installer.
