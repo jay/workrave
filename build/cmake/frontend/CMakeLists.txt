@@ -292,8 +292,8 @@ if (HAVE_EXERCISES)
   file(GLOB PO_FILES ${CMAKE_SOURCE_DIR}/../../po/*.po) 
 
   add_custom_command(
-      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/exercises.xml
-      COMMAND ${INTLTOOL_MERGE_EXECUTABLE} -x -u -c ${CMAKE_CURRENT_BINARY_DIR}/intltool-merge-cache ${CMAKE_SOURCE_DIR}/../../po ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml.in ${CMAKE_CURRENT_BINARY_DIR}/exercises.xml
+      OUTPUT ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml
+      COMMAND ${INTLTOOL_MERGE_EXECUTABLE} -x -u -c ${CMAKE_CURRENT_BINARY_DIR}/intltool-merge-cache ${CMAKE_SOURCE_DIR}/../../po ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml.in ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml
 
       DEPENDS ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml.in
     )
@@ -370,7 +370,7 @@ if (GETTEXT_FOUND)
   ENDFOREACH(lang)
 
   if (HAVE_EXERCISES)
-    set (EXERCISE_TARGETS ${CMAKE_CURRENT_BINARY_DIR}/exercises.xml)
+    set (EXERCISE_TARGETS ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml)
   endif (HAVE_EXERCISES)
 
   ADD_CUSTOM_TARGET(nls ALL
@@ -405,7 +405,7 @@ foreach(soundtheme ${SOUND_THEMES})
 endforeach(soundtheme)
 
 if (HAVE_EXERCISES)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/exercises.xml
+  install(FILES ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/exercises.xml
           DESTINATION share/exercises)
 
   file(GLOB EXERCISE_FILES ${CMAKE_SOURCE_DIR}/../../frontend/plugin/exercises/common/share/*.png)
