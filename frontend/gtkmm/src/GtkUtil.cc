@@ -391,6 +391,37 @@ GtkUtil::update_mnemonic(Gtk::Widget *widget, Glib::RefPtr<Gtk::AccelGroup> acce
 }
 
 
+/* GtkUtil::get_visible_tooltip_window()
+
+returns the visible tooltip window or NULL
+*/
+GtkWindow *GtkUtil::get_visible_tooltip_window()
+{
+    GtkWindow *func_retval = NULL;
+
+    GList *list = gtk_window_list_toplevels();
+    for( GList *item = list; item; item = item->next )
+    {
+        GtkWidget *widget = (GtkWidget *)item->data;
+        if( !widget || !GTK_IS_WINDOW( widget ) || !gtk_widget_get_visible( widget ) )
+            continue;
+
+        const char *widget_name = gtk_widget_get_name( widget );
+        if( !widget_name )
+            continue;
+
+        if( !strcmp( widget_name, "gtk-tooltip" ) )
+        {
+            func_retval = (GtkWindow *)widget;
+            break;
+        }
+    }
+
+    g_list_free( list );
+    return func_retval;
+}
+
+
 /* unwrap utf8 text. mainly for pre-wrapped gettext translation strings:
 "Je hebt je dagelijkse limiet bereikt. Stop met werken\n"
 "achter de computer. Als je werkdag nog niet voorbij is,\n"

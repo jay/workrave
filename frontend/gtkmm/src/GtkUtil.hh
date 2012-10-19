@@ -91,6 +91,8 @@ public:
 
   static void update_mnemonic(Gtk::Widget *widget, Glib::RefPtr<Gtk::AccelGroup>);
 
+  static GtkWindow *GtkUtil::get_visible_tooltip_window();
+
   static Glib::ustring unwrap_txt( const Glib::ustring &txt );
 
   static bool open_uri( const Glib::ustring& uri, bool show_errmsg = true, GdkScreen *screen = NULL );
