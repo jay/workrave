@@ -101,6 +101,13 @@ VersionInfoDescription=Workrave Setup built {#MyInstCreationDateTime}
 VersionInfoVersion={#FileVerStr}
 VersionInfoProductName={#SetupSetting("AppVerName")}
 
+; Since 5.5 Inno Setup is using RestartManager. Restart Manager will detect that the workrave 
+; applet is in use by explorer and offer to close explorer (taskbar). It is supposed to restart
+; explorer (taskbar) afterwards but it doesn't always do that... (tested Win7 x64 using Inno 5.5.2)
+; So, disable the Restart Manager behavior.
+CloseApplications=no
+RestartApplications=no
+
 
 [LangOptions]
 DialogFontSize=10
