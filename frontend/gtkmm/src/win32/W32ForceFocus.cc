@@ -135,7 +135,11 @@ DWORD W32ForceFocus::GetFunctions()
     }
     else
     {
+#ifdef BERNIERI_CUSTOM_BUILD
+        flags = ( ATTACH_INPUT | MINIMIZE_RESTORE );
+#else
         flags = ALL_FUNCTIONS;
+#endif
     }
 
     func_initialized = true;
