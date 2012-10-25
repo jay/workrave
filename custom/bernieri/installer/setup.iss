@@ -105,6 +105,7 @@ VersionInfoProductName={#SetupSetting("AppVerName")}
 ; applet is in use by explorer and offer to close explorer (taskbar). It is supposed to restart
 ; explorer (taskbar) afterwards but it doesn't always do that... (tested Win7 x64 using Inno 5.5.2)
 ; So, disable the Restart Manager behavior.
+; http://news.jrsoftware.org/read/article.php?id=97240&group=jrsoftware.innosetup#97240
 CloseApplications=no
 RestartApplications=no
 
@@ -170,6 +171,13 @@ Source: {#WorkraveINSTALLPath}\*.*; DestDir: {app}; Flags: {#DefaultFlags} recur
 Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Workrave.exe; ValueType: string; ValueData: {app}\lib\Workrave.exe; Flags: uninsdeletekey
 Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Workrave.exe; ValueName: Path; ValueType: string; ValueData: {app}\lib
 Root: HKLM; Subkey: SOFTWARE\Workrave; ValueName: CommonGTK; ValueType: string; ValueData: FALSE;
+
+; store the two most recent full application crash dumps in vista+
+; http://msdn.microsoft.com/en-us/library/windows/desktop/bb787181.aspx
+Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\workrave.exe; ValueName: DumpType; ValueType: dword; ValueData: 2;
+Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\workrave.exe; ValueName: DumpCount; ValueType: dword; ValueData: 2;
+Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\harpoonHelper.exe; ValueName: DumpType; ValueType: dword; ValueData: 2;
+Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\harpoonHelper.exe; ValueName: DumpCount; ValueType: dword; ValueData: 2;
 
 
 #define ActiveSetupSubkey 'SOFTWARE\Microsoft\Active Setup\Installed Components\{{180B0AC5-6FDA-438B-9466-C9894322B6BA}'
