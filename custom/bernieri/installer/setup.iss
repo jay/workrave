@@ -995,6 +995,7 @@ begin
 	CreateScreenshotPage;
 	
 	WizardForm.NoRadio.Checked := True;
+	WizardForm.PreparingNoRadio.Checked := True;
 end;
 
 
